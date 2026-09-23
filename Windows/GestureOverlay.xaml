@@ -1,0 +1,32 @@
+<Window x:Class="ScreenPin.Windows.GestureOverlay"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Topmost="True"
+        ShowInTaskbar="False"
+        ShowActivated="False"
+        ResizeMode="NoResize"
+        IsHitTestVisible="False"
+        WindowStartupLocation="Manual">
+    <!-- 手势轨迹层：透明、无边框、置顶、鼠标穿透，覆盖整个虚拟桌面 -->
+    <Canvas x:Name="Root" IsHitTestVisible="False">
+        <!-- 深色描边打底，保证浅色背景下轨迹也可见 -->
+        <Polyline x:Name="TrailGlow"
+                  Stroke="#66000000"
+                  StrokeThickness="4.5"
+                  StrokeLineJoin="Round"
+                  StrokeStartLineCap="Round"
+                  StrokeEndLineCap="Round"
+                  IsHitTestVisible="False" />
+        <!-- 待定色（半透明琥珀）：松开判定为圈才截图 -->
+        <Polyline x:Name="Trail"
+                  Stroke="#E6FFB300"
+                  StrokeThickness="2.5"
+                  StrokeLineJoin="Round"
+                  StrokeStartLineCap="Round"
+                  StrokeEndLineCap="Round"
+                  IsHitTestVisible="False" />
+    </Canvas>
+</Window>

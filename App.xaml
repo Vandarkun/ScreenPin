@@ -1,0 +1,8 @@
+<Application x:Class="ScreenPin.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             ShutdownMode="OnExplicitShutdown">
+    <!-- 无主窗口：启动即进入托盘，退出只能通过托盘菜单 -->
+    <Application.Resources>
+    </Application.Resources>
+</Application>

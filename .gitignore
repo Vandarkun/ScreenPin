@@ -1,0 +1,14 @@
+# 构建产物
+bin/
+obj/
+publish/
+publish-lite/
+installer/dist/
+
+# 安装器的大体积资产（如将来需要离线运行时再取消忽略）
+installer/assets/*.exe
+
+# 工具配置
+.zcodeignore
+*.user
+.vs/

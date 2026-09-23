@@ -1,0 +1,26 @@
+<Window x:Class="ScreenPin.Windows.PinWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        Topmost="True"
+        ShowInTaskbar="False"
+        ShowActivated="False"
+        WindowStartupLocation="Manual"
+        MouseLeftButtonDown="OnMouseLeftButtonDown">
+    <!-- 置顶贴图：左键拖动；右键关闭由全局钩子接管（吞下按键 + 发 WM_CLOSE），窗口自身不处理右键 -->
+    <Grid Margin="16">
+        <!-- 阴影源：黑底只负责投出影子，被上层完全盖住；图像不经过阴影着色器，保持锐利 -->
+        <Border Background="#FF000000">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="12" ShadowDepth="2" Direction="270" Opacity="0.45" Color="Black" RenderingBias="Performance" />
+            </Border.Effect>
+        </Border>
+        <!-- 极淡的 1px 描边，避免贴图溶进同色背景 -->
+        <Border BorderBrush="#2E000000" BorderThickness="1">
+            <Image x:Name="Shot" Stretch="Fill" SnapsToDevicePixels="True" />
+        </Border>
+    </Grid>
+</Window>

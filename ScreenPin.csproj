@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <!-- WPF 没有内置托盘控件，引入 WinForms 只为 NotifyIcon -->
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>ScreenPin</RootNamespace>
+    <AssemblyName>ScreenPin</AssemblyName>
+    <Version>0.1.0</Version>
+    <ApplicationIcon>ScreenPin.ico</ApplicationIcon>
+    <!-- DPI 感知必须在进程启动前生效，所以用清单而不是运行时 API -->
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <!-- WPF + WinForms 同时启用时，隐式 using 会让 Application/Point 等类型产生歧义 -->
+  <ItemGroup>
+    <Using Remove="System.Windows.Forms" />
+    <Using Remove="System.Drawing" />
+  </ItemGroup>
+
+  <!-- OCR：纯 C# PP-OCRv6 推理（零原生依赖），模型嵌入 DLL -->
+  <ItemGroup>
+    <PackageReference Include="Sdcb.SimdPaddleOCR" Version="1.4.2" />
+    <PackageReference Include="Sdcb.SimdPaddleOCR.Models.ChineseV6Tiny" Version="1.0.0" />
+  </ItemGroup>
+
+  <!-- WFAC010 是 WinForms 对清单里 DPI 设置的提示；本程序以 WPF 为主，DPI 由清单统一控制 -->
+  <PropertyGroup>
+    <NoWarn>$(NoWarn);WFAC010</NoWarn>
+  </PropertyGroup>
+
+</Project>

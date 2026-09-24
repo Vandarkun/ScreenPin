@@ -75,7 +75,8 @@ public partial class App : Application
 
     private void ExitApp()
     {
-        WindowPinService.UnpinAll(silent: true); // 退出前恢复所有由本软件设置的置顶
+        WindowPinService.UnpinAll(silent: true);        // 退出前恢复所有由本软件设置的置顶
+        WindowOpacityService.RestoreAll();              // 恢复所有被调整过透明度的窗口
         _tray?.Dispose();
         _tray = null;
         _controller?.Dispose();
@@ -89,7 +90,8 @@ public partial class App : Application
 
     protected override void OnExit(ExitEventArgs e)
     {
-        WindowPinService.UnpinAll(silent: true); // 兜底：任何退出路径都不留置顶残局
+        WindowPinService.UnpinAll(silent: true);  // 兜底：任何退出路径都不留残局
+        WindowOpacityService.RestoreAll();
         _tray?.Dispose();
         _controller?.Dispose();
         base.OnExit(e);

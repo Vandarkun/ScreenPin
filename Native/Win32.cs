@@ -18,8 +18,10 @@ internal static class Win32
     internal const int WM_RBUTTONUP = 0x0205;
     internal const int WM_MBUTTONDOWN = 0x0207;
     internal const int WM_MBUTTONUP = 0x0208;
+    internal const int WM_MOUSEWHEEL = 0x020A;
 
-    internal const int VK_MENU = 0x12; // Alt
+    internal const int VK_MENU = 0x12;    // Alt
+    internal const int VK_CONTROL = 0x11; // Ctrl
 
     [DllImport("user32.dll")]
     internal static extern short GetAsyncKeyState(int vKey);
@@ -92,6 +94,7 @@ internal static class Win32
     internal const int WS_EX_TRANSPARENT = 0x00000020;   // 鼠标穿透
     internal const int WS_EX_TOOLWINDOW = 0x00000080;    // 不出现在 Alt+Tab
     internal const int WS_EX_NOACTIVATE = 0x08000000;    // 不抢焦点
+    internal const int WS_EX_LAYERED = 0x00080000;       // 分层窗口（透明度调整需要）
 
     internal static readonly nint HWND_TOPMOST = new(-1);
     internal static readonly nint HWND_NOTOPMOST = new(-2);
@@ -118,6 +121,23 @@ internal static class Win32
     [DllImport("user32.dll")]
     [return: MarshalAs(UnmanagedType.Bool)]
     internal static extern bool GetCursorPos(out POINT lpPoint);
+
+    // ---------- 分层窗口透明度 ----------
+
+    internal const uint LWA_ALPHA = 0x00000002;
+
+    [DllImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static extern bool SetLayeredWindowAttributes(nint hWnd, uint crKey, byte bAlpha, uint dwFlags);
+
+    [DllImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static extern bool GetLayeredWindowAttributes(nint hWnd, out uint crKey, out byte bAlpha, out uint dwFlags);
+
+    // ---------- 屏幕取色 ----------
+
+    [DllImport("gdi32.dll")]
+    internal static extern uint GetPixel(nint hdc, int x, int y);
 
     // ---------- WindowPin：窗口查找与置顶 ----------
 

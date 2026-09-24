@@ -76,17 +76,25 @@ public sealed class GestureController : IDisposable
             {
                 case HookMouseKind.MiddleDown:
                 {
-                    // Alt+中键 = WindowPin（窗口置顶切换）；普通中键完全放行
+                    // Ctrl+中键 = 屏幕取色；Alt+中键 = WindowPin；普通中键完全放行
+                    bool ctrlHeld = (Win32.GetAsyncKeyState(Win32.VK_CONTROL) & 0x8000) != 0;
                     bool altHeld = (Win32.GetAsyncKeyState(Win32.VK_MENU) & 0x8000) != 0;
-                    if (!altHeld)
+                    if (!ctrlHeld && !altHeld)
                     {
                         return false;
                     }
                     _swallowNextMiddleUp = true;
-                    AppLog.Write($"MiddleDown @({e.X},{e.Y}): Alt+中键，WindowPin 切换");
-                    // 钩子线程只做判定与投递；窗口查找/置顶在 UI 线程执行
-                    int x = e.X, y = e.Y;
-                    _ui.BeginInvoke(() => WindowPinService.ToggleAt(x, y), DispatcherPriority.Send);
+                    int mx = e.X, my = e.Y;
+                    if (ctrlHeld)
+                    {
+                        AppLog.Write($"MiddleDown @({mx},{my}): Ctrl+中键，屏幕取色");
+                        _ui.BeginInvoke(() => ColorPickerService.PickAt(mx, my), DispatcherPriority.Send);
+                    }
+                    else
+                    {
+                        AppLog.Write($"MiddleDown @({mx},{my}): Alt+中键，WindowPin 切换");
+                        _ui.BeginInvoke(() => WindowPinService.ToggleAt(mx, my), DispatcherPriority.Send);
+                    }
                     return true;
                 }
 
@@ -98,6 +106,24 @@ public sealed class GestureController : IDisposable
                         return true; // 与被吞的按下配对，不留孤儿事件
                     }
                     return false;
+                }
+
+                case HookMouseKind.Wheel:
+                {
+                    // Alt+滚轮 = 调整鼠标所在外部窗口透明度；普通滚轮直接放行
+                    // （贴图上的滚轮，包括 Alt+滚轮，都由贴图自己的 WPF 事件处理）
+                    bool altHeld = (Win32.GetAsyncKeyState(Win32.VK_MENU) & 0x8000) != 0;
+                    if (!altHeld)
+                    {
+                        return false;
+                    }
+                    if (PinHitTest.TryHit(e.X, e.Y, out _))
+                    {
+                        return false; // 鼠标在贴图上：交给贴图自己调透明度
+                    }
+                    int wx = e.X, wy = e.Y, delta = e.WheelDelta;
+                    _ui.BeginInvoke(() => WindowOpacityService.AdjustAt(wx, wy, delta), DispatcherPriority.Send);
+                    return true;
                 }
 
                 case HookMouseKind.RightDown:

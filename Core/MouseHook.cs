@@ -9,10 +9,11 @@ public enum HookMouseKind
     RightDown,
     RightUp,
     MiddleDown,
-    MiddleUp
+    MiddleUp,
+    Wheel
 }
 
-public readonly record struct HookMouseEventArgs(HookMouseKind Kind, int X, int Y, bool Injected);
+public readonly record struct HookMouseEventArgs(HookMouseKind Kind, int X, int Y, bool Injected, int WheelDelta = 0);
 
 /// <summary>
 /// WH_MOUSE_LL 全局鼠标钩子。
@@ -91,11 +92,14 @@ public sealed class MouseHook : IDisposable
                 Win32.WM_RBUTTONUP => HookMouseKind.RightUp,
                 Win32.WM_MBUTTONDOWN => HookMouseKind.MiddleDown,
                 Win32.WM_MBUTTONUP => HookMouseKind.MiddleUp,
+                Win32.WM_MOUSEWHEEL => HookMouseKind.Wheel,
                 _ => (HookMouseKind?)null,
             };
             if (kind is { } k && !injected)
             {
-                var args = new HookMouseEventArgs(k, lParam.pt.X, lParam.pt.Y, injected);
+                // 滚轮增量在 mouseData 的高 16 位，一格 ±120
+                int wheel = k == HookMouseKind.Wheel ? (short)((lParam.mouseData >> 16) & 0xFFFF) : 0;
+                var args = new HookMouseEventArgs(k, lParam.pt.X, lParam.pt.Y, injected, wheel);
                 if (Event(args))
                 {
                     return 1; // 吞掉，不进入系统输入链

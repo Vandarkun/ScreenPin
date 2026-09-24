@@ -12,38 +12,16 @@ namespace ScreenPin.Core;
 /// </summary>
 internal static class WindowPinService
 {
-    private const uint GaRoot = 2;
     private static readonly object Gate = new();
     private static readonly HashSet<nint> Pinned = new();
-    private static readonly HashSet<string> ExcludedClasses = new() { "Progman", "WorkerW" }; // 桌面
 
     /// <summary>切换鼠标位置下窗口的置顶状态（必须在 UI 线程调用）。</summary>
     public static void ToggleAt(int x, int y)
     {
         try
         {
-            var pt = new Win32.POINT { X = x, Y = y };
-            nint child = Win32.WindowFromPoint(pt);
-            if (child == nint.Zero)
-            {
-                return;
-            }
-            nint root = Win32.GetAncestor(child, GaRoot);
+            nint root = WindowLocator.FindExternalTarget(x, y);
             if (root == nint.Zero)
-            {
-                root = child;
-            }
-
-            // 排除本程序自己的窗口（轨迹/贴图/通知/设置全覆盖）
-            _ = Win32.GetWindowThreadProcessId(root, out uint pid);
-            if (pid == (uint)Environment.ProcessId)
-            {
-                return;
-            }
-            // 排除桌面
-            var cls = new StringBuilder(64);
-            _ = Win32.GetClassName(root, cls, 64);
-            if (ExcludedClasses.Contains(cls.ToString()))
             {
                 return;
             }

@@ -89,6 +89,19 @@ public partial class PinWindow : Window
         ReleaseMouseCapture();
     }
 
+    /// <summary>滚轮调整贴图透明度（30%~100%，每格 10%）。只改窗口显示，不动位图。</summary>
+    protected override void OnMouseWheel(MouseWheelEventArgs e)
+    {
+        base.OnMouseWheel(e);
+        double next = Math.Clamp(Opacity + (e.Delta > 0 ? 0.1 : -0.1), 0.3, 1.0);
+        if (Math.Abs(next - Opacity) < 0.001)
+        {
+            return; // 已到边界
+        }
+        Opacity = next;
+        e.Handled = true;
+    }
+
     protected override void OnClosed(EventArgs e)
     {
         PinHitTest.Unregister(_hwnd);

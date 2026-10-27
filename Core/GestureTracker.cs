@@ -28,15 +28,25 @@ public static class GestureConfig
     /// <summary>有效手势的最少采样点数</summary>
     public const int MinPoints = 5;
 
-    /// <summary>方向变化判定：一段同方向行程至少这么长才算一笔</summary>
-    public const int MinStrokeLength = 10;
+    // ---- 圈选兜底判定（严格：宁可拒绝，不要误判成框图）----
+    // 旧版兜底"方向变化>=3 即框图"配合 10px 最小笔画，手抖和波浪线都会中招。
 
-    /// <summary>闭合判定：终点距起点 &lt;= max(基数, 外接矩形对角线 × 比例)</summary>
-    public const int ClosureBase = 40;
-    public const double ClosureDiagonalRatio = 0.3;
+    /// <summary>兜底笔画最小长度：比手抖幅度大一个量级，只有真正的转向才算一笔</summary>
+    public const int LoopStrokeLength = 35;
 
-    /// <summary>圈选判定：方向变化达到该次数也视为画了一个圈（兼容不封口的 U 形）</summary>
-    public const int DirectionChangesForLoop = 3;
+    /// <summary>兜底要求的方向变化次数（以 LoopStrokeLength 量化）</summary>
+    public const int LoopDirectionChanges = 3;
+
+    /// <summary>兜底闭合判定：终点距起点 &lt;= max(基数, 对角线×比例)</summary>
+    public const int LoopClosureBase = 30;
+    public const double LoopClosureDiagonalRatio = 0.2;
+
+    /// <summary>
+    /// 兜底"绕圈"判定：轨迹总长 >= 对角线×该比例。
+    /// 数学依据：圈/椭圆的周长 ≈ 对角线 × 2.2（π 的关系），
+    /// 直线 = 1.0，普通波浪/斜线抖动 ≈ 1.2~1.5。
+    /// </summary>
+    public const double LoopPathRatio = 1.8;
 
     /// <summary>轨迹点数上限，防御异常输入</summary>
     public const int MaxPoints = 4000;
@@ -211,13 +221,31 @@ public sealed class GestureTracker
             return bottomNet < 0 ? GestureAction.CopyText : GestureAction.Pin;
         }
 
-        // 常规圈选：闭合 或 方向变化足够多（BuildStrokes 段数-1 即变化次数）
+        // 常规圈选兜底（严格）：真闭合，或（真转向 + 路径长度接近绕圈周长）
         double diagonal = Math.Sqrt(width * width + height * height);
-        double closureLimit = Math.Max(GestureConfig.ClosureBase, diagonal * GestureConfig.ClosureDiagonalRatio);
-        bool closed = Dist(start, end) <= closureLimit;
-        return closed || BuildStrokes(points).Count - 1 >= GestureConfig.DirectionChangesForLoop
+        double closureLimit = Math.Max(GestureConfig.LoopClosureBase, diagonal * GestureConfig.LoopClosureDiagonalRatio);
+        if (Dist(start, end) <= closureLimit)
+        {
+            return GestureAction.Pin;
+        }
+        int changes = BuildStrokes(points, GestureConfig.LoopStrokeLength).Count - 1;
+        bool loopish = PathLength(points) >= GestureConfig.LoopPathRatio * diagonal;
+        return changes >= GestureConfig.LoopDirectionChanges && loopish
             ? GestureAction.Pin
             : GestureAction.None;
+    }
+
+    /// <summary>轨迹总长度。</summary>
+    private static double PathLength(GPoint[] points)
+    {
+        double total = 0;
+        for (int i = 1; i < points.Length; i++)
+        {
+            double dx = points[i].X - points[i - 1].X;
+            double dy = points[i].Y - points[i - 1].Y;
+            total += Math.Sqrt(dx * dx + dy * dy);
+        }
+        return total;
     }
 
     /// <summary>带内（yLo..yHi）轨迹的水平行程总量（左右往复都累计）。</summary>
@@ -256,10 +284,11 @@ public sealed class GestureTracker
     }
 
     /// <summary>
-    /// 把轨迹量化为 8 方向并压缩成笔画序列：连续同方向合并，不足一笔长度的折返当噪声并入。
-    /// 直线拖动约 1 笔；随手画圈 4 笔以上；规矩的 U 形恰好 3 笔。
+    /// 把轨迹量化为 8 方向并压缩成笔画序列：连续同方向合并，不足 minStroke 的折返当噪声并入。
+    /// minStroke 决定"多大算一笔"：判圈用 LoopStrokeLength（35px，手抖不算），
+    /// 波浪线在此尺度下通常只剩一两笔。
     /// </summary>
-    private static List<Stroke> BuildStrokes(GPoint[] points)
+    private static List<Stroke> BuildStrokes(GPoint[] points, int minStroke)
     {
         var strokes = new List<Stroke>();
         int prevSector = -1;
@@ -285,7 +314,7 @@ public sealed class GestureTracker
             {
                 run += len;
             }
-            else if (run >= GestureConfig.MinStrokeLength)
+            else if (run >= minStroke)
             {
                 strokes.Add(new Stroke(prevSector, run));
                 prevSector = sector;

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="500" viewBox="0 0 1280 500" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">两种 U 形手势，一眼分清</title>
+  <desc id="desc">按住鼠标右键：从左上起笔，下、右、上，生成截图贴图；从右上起笔，下、左、上，OCR 识别并复制文字。虚线矩形表示截图范围。</desc>
+  <defs><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#D8DDEC"/></pattern></defs>
+  <rect x="1" y="1" width="1278" height="498" rx="20" fill="#F6F7FC" stroke="#E1E5F0"/>
+  <g font-family="'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif">
+    <text x="40" y="53" font-size="23" font-weight="700" fill="#202A48">同样画 U，方向决定动作。</text>
+    <text x="40" y="83" font-size="15" fill="#65708F">按住右键起笔，松开执行 · 虚线框为截取范围</text>
+    <g>
+      <rect x="32" y="109" width="598" height="358" rx="16" fill="white" stroke="#E1E5F0"/>
+      <rect x="56" y="131" width="32" height="32" rx="10" fill="#EEEAFE"/>
+      <text x="72" y="153" text-anchor="middle" font-size="16" font-weight="700" fill="#7660DA">1</text>
+      <text x="102" y="155" font-size="21" font-weight="700" fill="#293251">截图贴图</text>
+      <text x="601" y="154" text-anchor="end" font-size="14" fill="#7660DA">左上起笔 ↓ → ↑</text>
+      <rect x="57" y="187" width="330" height="218" rx="10" fill="url(#grid)"/>
+      <rect x="91" y="228" width="262" height="144" rx="8" fill="#F3F0FF" stroke="#A493E8" stroke-width="1.5" stroke-dasharray="6 6"/>
+      <text x="222" y="292" text-anchor="middle" font-size="17" font-weight="600" fill="#81739F">想留在眼前的</text>
+      <text x="222" y="320" text-anchor="middle" font-size="17" font-weight="600" fill="#81739F">参考内容</text>
+      <path d="M91 228v115q0 29 29 29h204q29 0 29-29V239" stroke="#8065DA" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="91" cy="228" r="7" fill="#8065DA" stroke="white" stroke-width="3"/>
+      <path d="m343 250 10-15 10 15" stroke="#8065DA" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="91" y="212" text-anchor="middle" font-size="13" font-weight="700" fill="#6950BF">起点</text>
+      <text x="353" y="212" text-anchor="middle" font-size="13" fill="#6950BF">终点</text>
+      <path d="m84 291 7 10 7-10m116 74 10 7-10 7m132-68 7-10 7 10" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M405 292h28m-7-7 7 7-7 7" stroke="#AFB7D0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="450" y="245" width="148" height="94" rx="2" fill="#F8F7FE" stroke="#C5BBE5"/>
+      <path d="M464 265h93M464 280h111M464 295h74M464 310h95" stroke="#C4BADF" stroke-width="4" stroke-linecap="round"/>
+      <rect x="520" y="230" width="78" height="26" rx="13" fill="#8065DA"/>
+      <text x="559" y="248" text-anchor="middle" font-size="12" fill="#FFFFFF">置顶贴图</text>
+      <text x="524" y="369" text-anchor="middle" font-size="14" fill="#6950BF">默认复制图片</text>
+      <text x="57" y="439" font-size="14" fill="#65708F">也可以按住右键画圈，生成矩形贴图。</text>
+    </g>
+    <g>
+      <rect x="650" y="109" width="598" height="358" rx="16" fill="white" stroke="#E1E5F0"/>
+      <rect x="674" y="131" width="32" height="32" rx="10" fill="#E2F5F0"/>
+      <text x="690" y="153" text-anchor="middle" font-size="16" font-weight="700" fill="#168773">2</text>
+      <text x="720" y="155" font-size="21" font-weight="700" fill="#293251">OCR 取字</text>
+      <text x="1219" y="154" text-anchor="end" font-size="14" fill="#168773">右上起笔 ↓ ← ↑</text>
+      <rect x="675" y="187" width="330" height="218" rx="10" fill="url(#grid)"/>
+      <rect x="709" y="228" width="262" height="144" rx="8" fill="#EAF8F4" stroke="#70B6A7" stroke-width="1.5" stroke-dasharray="6 6"/>
+      <text x="840" y="292" text-anchor="middle" font-size="17" font-weight="600" fill="#5B9286">图片里也有</text>
+      <text x="840" y="320" text-anchor="middle" font-size="17" font-weight="600" fill="#5B9286">想复制的文字</text>
+      <path d="M971 228v115q0 29-29 29H738q-29 0-29-29V239" stroke="#269B84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="971" cy="228" r="7" fill="#269B84" stroke="white" stroke-width="3"/>
+      <path d="m699 250 10-15 10 15" stroke="#269B84" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="971" y="212" text-anchor="middle" font-size="13" font-weight="700" fill="#168773">起点</text>
+      <text x="709" y="212" text-anchor="middle" font-size="13" fill="#168773">终点</text>
+      <path d="m964 291 7 10 7-10m-130 64-10 7 10 7m-146-68 7-10 7 10" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M1023 292h28m-7-7 7 7-7 7" stroke="#AFB7D0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="1068" y="245" width="148" height="94" rx="8" fill="#F3FAF8" stroke="#B5D9D0"/>
+      <text x="1142" y="277" text-anchor="middle" font-size="14" fill="#356B60">图片里也有</text>
+      <text x="1142" y="301" text-anchor="middle" font-size="14" fill="#356B60">想复制的文字</text>
+      <path d="M1084 316h3" stroke="#269B84" stroke-width="14"/>
+      <text x="1142" y="369" text-anchor="middle" font-size="14" fill="#168773">默认复制文字</text>
+      <text x="675" y="439" font-size="14" fill="#65708F">本地识别，看到复制提示后即可粘贴。</text>
+    </g>
+  </g>
+</svg>

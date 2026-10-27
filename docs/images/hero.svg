@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="620" viewBox="0 0 1280 620" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">ScreenPin — 圈住灵感，留在眼前</title>
+  <desc id="desc">功能场景插画：右键圈选参考文档，生成悬浮贴图，本地 OCR 将文字复制到剪贴板。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="620" gradientUnits="userSpaceOnUse"><stop stop-color="#10162C"/><stop offset="1" stop-color="#1A1940"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#7668FA" stop-opacity=".25"/><stop offset="1" stop-color="#7668FA" stop-opacity="0"/></radialGradient>
+    <linearGradient id="accent" x1="68" y1="230" x2="500" y2="290" gradientUnits="userSpaceOnUse"><stop stop-color="#B5AEFF"/><stop offset="1" stop-color="#79E8DA"/></linearGradient>
+    <filter id="shadow" x="-25%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#040713" flood-opacity=".5"/></filter>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#A9B1DA" fill-opacity=".12"/></pattern>
+  </defs>
+  <rect width="1280" height="620" rx="24" fill="url(#bg)"/>
+  <ellipse cx="1030" cy="260" rx="430" ry="380" fill="url(#glow)"/>
+  <rect x="568" y="64" width="664" height="480" fill="url(#dots)"/>
+  <g font-family="'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif">
+    <rect x="64" y="64" width="50" height="50" rx="15" fill="#7668FA"/>
+    <path d="M80 77h18l-3 12 6 6H77l6-6-3-12Z" fill="white"/>
+    <path d="M89 96v10" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    <text x="130" y="102" font-size="38" font-weight="700" letter-spacing="-1" fill="#FFFFFF">ScreenPin</text>
+    <text x="66" y="160" font-size="12" font-weight="600" letter-spacing="3" fill="#A6AED0">YOUR DESKTOP, IN FLOW.</text>
+    <text x="62" y="244" font-size="60" font-weight="700" letter-spacing="-2" fill="#F6F7FF">圈住灵感，</text>
+    <text x="62" y="324" font-size="60" font-weight="700" letter-spacing="-2" fill="url(#accent)">留在眼前。</text>
+    <text x="66" y="378" font-size="21" fill="#C4CAE2">右键一圈，截图即贴图。</text>
+    <text x="66" y="413" font-size="21" fill="#C4CAE2">取字、置顶、取色，也顺手完成。</text>
+    <g font-size="14" fill="#E4E6FF">
+      <rect x="66" y="449" width="112" height="36" rx="18" fill="#242B48" stroke="#39405F"/><text x="122" y="473" text-anchor="middle">鼠标手势</text>
+      <rect x="190" y="449" width="112" height="36" rx="18" fill="#242B48" stroke="#39405F"/><text x="246" y="473" text-anchor="middle">本地 OCR</text>
+      <rect x="314" y="449" width="112" height="36" rx="18" fill="#242B48" stroke="#39405F"/><text x="370" y="473" text-anchor="middle">MIT 开源</text>
+    </g>
+    <text x="66" y="560" font-size="13" letter-spacing="2" fill="#7F89B2">WINDOWS 10 / 11</text>
+    <circle cx="249" cy="555" r="2" fill="#7F89B2"/>
+    <text x="266" y="560" font-size="13" letter-spacing="1" fill="#7F89B2">LESS SWITCHING. MORE FLOW.</text>
+    <text x="1200" y="87" text-anchor="end" font-size="12" letter-spacing="1" fill="#929BC3">工作场景示意</text>
+    <g filter="url(#shadow)">
+      <rect x="586" y="117" width="584" height="353" rx="14" fill="#182039" stroke="#3D4566"/>
+      <path d="M600 117h556a14 14 0 0 1 14 14v30H586v-30a14 14 0 0 1 14-14Z" fill="#222B48"/>
+      <circle cx="608" cy="139" r="4" fill="#717A9B"/><circle cx="625" cy="139" r="4" fill="#717A9B"/><circle cx="642" cy="139" r="4" fill="#717A9B"/>
+      <text x="690" y="145" font-size="13" fill="#A6AFCC">参考文档 / 开发笔记</text>
+      <path d="M610 186h84M610 202h54M610 218h68" stroke="#46506F" stroke-width="5" stroke-linecap="round"/>
+      <path d="M718 177v272" stroke="#2C3553"/>
+      <text x="746" y="209" font-size="18" font-weight="700" fill="#DDE2F5">接口备忘</text>
+      <rect x="744" y="229" width="232" height="118" rx="6" fill="#242E4C"/>
+      <text x="762" y="259" font-size="14" fill="#AAB9E2">GET /api/notes</text>
+      <text x="762" y="288" font-size="14" fill="#AAB9E2">page     当前页码</text>
+      <text x="762" y="317" font-size="14" fill="#AAB9E2">limit      每页数量</text>
+      <path d="M746 380h287M746 399h204M746 418h250" stroke="#374361" stroke-width="6" stroke-linecap="round"/>
+    </g>
+    <rect x="731" y="219" width="258" height="140" rx="10" fill="#76E6D0" fill-opacity=".04" stroke="#76E6D0" stroke-opacity=".4" stroke-dasharray="5 6"/>
+    <path d="M733 223v110q0 25 27 25h204q25 0 25-25v-94" stroke="#79E8DA" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="733" cy="223" r="6" fill="#79E8DA"/>
+    <path d="m980 249 9-13 9 13" stroke="#79E8DA" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M1004 280c55 0 54 45 75 62" stroke="#A49AFF" stroke-width="2" stroke-dasharray="5 5"/>
+    <g filter="url(#shadow)">
+      <rect x="870" y="336" width="333" height="157" rx="2" fill="#F7F8FE" stroke="#CFD6EF"/>
+      <text x="892" y="370" font-size="20" font-weight="700" fill="#293456">接口备忘</text>
+      <text x="892" y="401" font-size="15" fill="#576589">GET /api/notes</text>
+      <text x="892" y="432" font-size="15" fill="#576589">page     当前页码</text>
+      <text x="892" y="463" font-size="15" fill="#576589">limit      每页数量</text>
+    </g>
+    <rect x="1070" y="318" width="133" height="30" rx="15" fill="#7668FA"/>
+    <text x="1136" y="338" text-anchor="middle" font-size="13" font-weight="700" fill="white">置顶贴图</text>
+    <path d="m1162 454 4 30 7-9 12-2-23-19Z" fill="#FFFFFF" stroke="#10162C" stroke-width="2" stroke-linejoin="round"/>
+    <g filter="url(#shadow)">
+      <rect x="632" y="493" width="400" height="76" rx="12" fill="#262E4D" stroke="#495273"/>
+      <rect x="650" y="513" width="34" height="34" rx="10" fill="#75E7D0" fill-opacity=".15"/>
+      <path d="m659 530 6 6 11-13" stroke="#79E8DA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="700" y="523" font-size="15" font-weight="700" fill="#F0F3FF">文字已复制</text>
+      <text x="700" y="548" font-size="13" fill="#AAB5D5">本地 OCR 识别 → 直接粘贴到笔记</text>
+    </g>
+  </g>
+</svg>

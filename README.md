@@ -11,7 +11,7 @@ Windows 鼠标手势效率工具 · 截图贴图 · 本地 OCR 取字 · 窗口�
 [![.NET 8 · WPF](https://img.shields.io/badge/.NET-8%20%7C%20WPF-512BD4?style=flat-square)](ScreenPin.csproj)
 [![MIT License](https://img.shields.io/badge/License-MIT-25A890?style=flat-square)](LICENSE)
 
-[**下载安装版**](https://github.com/Vandarkun/ScreenPin/releases/latest/download/ScreenPin-Setup.exe) · [免安装版](https://github.com/Vandarkun/ScreenPin/releases/latest/download/ScreenPin.exe) · [查看操作](#gestures) · [反馈与建议](https://github.com/Vandarkun/ScreenPin/issues)
+[**下载安装版**](https://github.com/Vandarkun/ScreenPin/releases/latest/download/ScreenPin-Setup.exe) · [查看操作](#gestures) · [反馈与建议](https://github.com/Vandarkun/ScreenPin/issues)
 
 ![ScreenPin 场景示意：右键圈选参考内容，生成悬浮贴图，并在本地识别文字](docs/images/hero.png)
 
@@ -65,10 +65,7 @@ Windows 鼠标手势效率工具 · 截图贴图 · 本地 OCR 取字 · 窗口�
 
 适用于 **Windows 10 / 11，64 位（x64）**。
 
-| 方式 | 下载 | 适合谁 |
-| --- | --- | --- |
-| 安装版 | [ScreenPin-Setup.exe](https://github.com/Vandarkun/ScreenPin/releases/latest/download/ScreenPin-Setup.exe) | 想直接开始使用；缺少 .NET 8 桌面运行时时，安装器会自动联网下载并安装 |
-| 免安装版 | [ScreenPin.exe](https://github.com/Vandarkun/ScreenPin/releases/latest/download/ScreenPin.exe) | 已安装 [.NET 8 Desktop Runtime（x64）](https://dotnet.microsoft.com/zh-cn/download/dotnet/8.0)，下载后直接运行 |
+下载 [ScreenPin-Setup.exe](https://github.com/Vandarkun/ScreenPin/releases/latest/download/ScreenPin-Setup.exe)（约 8.5MB）双击安装；缺少 .NET 8 桌面运行时时，安装器会自动联网下载并安装。安装时可选桌面快捷方式与开机自启，可在系统"设置 → 应用"中卸载。
 
 其他版本和更新说明见 [Releases](https://github.com/Vandarkun/ScreenPin/releases)。首次安装若需补齐运行时，请保持联网；截图、取字和取色功能可在本地离线使用。
 
